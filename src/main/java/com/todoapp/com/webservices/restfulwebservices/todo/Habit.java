@@ -41,85 +41,58 @@ public class Habit {
 		return id;
 	}
 
-
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
 
 	public String getUsername() {
 		return username;
 	}
 
-
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
-
 
 	public String getHabitname() {
 		return habitname;
 	}
 
-
-
 	public void setHabitname(String habitname) {
 		this.habitname = habitname;
 	}
-
-
 
 	public String getDescription() {
 		return description;
 	}
 
-
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-
 
 	public String getHabbitTrigger() {
 		return habitTrigger;
 	}
 
-
-
 	public void setHabitTrigger(String trigger) {
 		this.habitTrigger = trigger;
 	}
-
-
 
 	public String getReward() {
 		return reward;
 	}
 
-
-
 	public void setReward(String reward) {
 		this.reward = reward;
 	}
 
-
-
 	public Long getPriority() {
+		// Returing priority
 		return priority;
 	}
-
-
 
 	public void setPriority(Long priority) {
 		this.priority = priority;
 	}
-
-
 
 	@Override
 	public int hashCode() {
