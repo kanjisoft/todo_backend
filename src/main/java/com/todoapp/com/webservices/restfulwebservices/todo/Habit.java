@@ -1,13 +1,11 @@
 package com.todoapp.com.webservices.restfulwebservices.todo;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Habit {
+public class Habit  implements Comparable<Habit>{
 	
 	@Id
 	@GeneratedValue
@@ -15,18 +13,18 @@ public class Habit {
 	private String username;
 	private String habitname;
 	private String description;
-	private String habitTrigger;
+	private String reminder;
 	private String reward;
 	private Long priority;
 
-	public Habit(Long id, String username, String habitname, String description, String trigger, String reward,
+	public Habit(Long id, String username, String habitname, String description, String reminder, String reward,
 			Long priority) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.habitname = habitname;
 		this.description = description;
-		this.habitTrigger = trigger;
+		this.reminder = reminder;
 		this.reward = reward;
 		this.priority = priority;
 	}
@@ -69,12 +67,12 @@ public class Habit {
 		this.description = description;
 	}
 
-	public String getHabbitTrigger() {
-		return habitTrigger;
+	public String getReminder() {
+		return reminder;
 	}
 
-	public void setHabitTrigger(String trigger) {
-		this.habitTrigger = trigger;
+	public void setReminder(String reminder) {
+		this.reminder = reminder;
 	}
 
 	public String getReward() {
@@ -94,6 +92,14 @@ public class Habit {
 		this.priority = priority;
 	}
 
+	@Override
+	  public int compareTo(Habit h) {
+	    if (priority ==  null || h.getPriority() == null) {
+	      return 0;
+	    }
+	    return priority.compareTo(h.getPriority());
+	  }
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

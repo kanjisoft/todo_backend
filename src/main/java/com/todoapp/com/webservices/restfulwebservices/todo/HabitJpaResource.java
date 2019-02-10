@@ -1,6 +1,7 @@
 package com.todoapp.com.webservices.restfulwebservices.todo;
 
 import java.net.URI;
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -35,14 +36,16 @@ public class HabitJpaResource {
 	
 	// /users/mark/todos
 	@GetMapping("/jpa/users/{username}/habits")
-	public List<Habit> getAllTodos(@PathVariable String username){
-		return this.habitJpaRepository.findByUsername(username);
-		//return this.todoService.findAll(); 
+	public List<Habit> getAllHabits(@PathVariable String username){
+		List<Habit> habits = this.habitJpaRepository.findByUsername(username);
+		Collections.sort(habits);
+		return habits; 
 	}
 
 	@GetMapping("/jpa/users/{username}/habits/{id}")
 	public Habit getHabit(@PathVariable String username,  @PathVariable long id){
-		return this.habitJpaRepository.findById(id).get(); 
+		return this.habitJpaRepository.findById(id).get();
+
 		//return this.todoService.findById(id);
 	}
 
