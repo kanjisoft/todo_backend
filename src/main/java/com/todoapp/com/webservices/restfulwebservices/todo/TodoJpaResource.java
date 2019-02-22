@@ -1,6 +1,7 @@
 package com.todoapp.com.webservices.restfulwebservices.todo;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -19,7 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
-@CrossOrigin(origins="http://localhost:4200")
+//@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin
 @RestController
 public class TodoJpaResource {
 	
@@ -34,18 +36,37 @@ public class TodoJpaResource {
 	private TodoJpaRepository todoJpaRepository;
 	
 	// /users/mark/todos
-	@GetMapping("/jpa/users/{username}/todos")
+	@GetMapping("/jpa/users/{username}/todos/all")
 	public List<Todo> getAllTodos(@PathVariable String username){
 		return this.todoJpaRepository.findByUsername(username);
-		//return this.todoService.findAll(); 
+	}
+
+	@GetMapping("/jpa/users/{username}/todos/current")
+	public List<Todo> getAllTodosCurrent(@PathVariable String username){
+		List<Todo> todos = this.todoJpaRepository.findByUsername(username);
+		List<Todo> currentTodos = new ArrayList();
+		for (Todo todo:todos) {
+			if (!todo.isDone()) {
+				currentTodos.add(todo);
+			}
+		}
+		return currentTodos; 
 	}
 
 	@GetMapping("/jpa/users/{username}/todos/{id}")
 	public Todo getTodo(@PathVariable String username,  @PathVariable long id){
 		return this.todoJpaRepository.findById(id).get(); 
-		//return this.todoService.findById(id);
 	}
 
+	@GetMapping("/jpa/users/{username}/todos/{id}/toggle")
+	public Todo toggleTodo(@PathVariable String username,  @PathVariable long id){
+		Todo todo = this.todoJpaRepository.findById(id).get();
+		todo.setDone(!todo.isDone());
+		Todo todoUpdated = this.todoJpaRepository.save(todo);
+		return todoUpdated; 
+		//return this.todoService.findById(id);
+	}
+	
 	@PutMapping("/jpa/users/{username}/todos/{id}")
 	public ResponseEntity<Todo> updateTodo(@PathVariable String username, 
 			@PathVariable long id,
@@ -68,7 +89,7 @@ public class TodoJpaResource {
 		// location
 		// Get current resource URL
 		// /users/{username}/todo{id}
-		
+	 	
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 		.path("/{id}").buildAndExpand(createdTodo.getId()).toUri();
 

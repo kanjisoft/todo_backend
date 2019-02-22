@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-@CrossOrigin(origins="http://localhost:4200")
+//@CrossOrigin(origins="http://localhost:4201")
+@CrossOrigin
 @RestController
 public class TodoResource {
 	
@@ -24,11 +25,16 @@ public class TodoResource {
 	private TodoHardcodedService todoService;
 	
 	// /users/mark/todos
-	@GetMapping("/users/{username}/todos")
+	@GetMapping("/users/{username}/todoss")
 	public List<Todo> getAllTodos(@PathVariable String username){
-		return this.todoService.findAll(); 
+		return this.todoService.findAll();
 	}
 
+//	@GetMapping("/users/{username}/todoscurrent")
+//	public List<Todo> getAllTodosCurrent(@PathVariable String username){
+//		return this.todoService.findAllCurrent(); 
+//	}
+	
 	@GetMapping("/users/{username}/todos/{id}")
 	public Todo getTodo(@PathVariable String username,  @PathVariable long id){
 		return this.todoService.findById(id);

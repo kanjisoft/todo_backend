@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-
+ 
 @Service
 public class TodoHardcodedService {
 
@@ -21,6 +21,19 @@ public class TodoHardcodedService {
 	public List<Todo> findAll(){
 		return todos;
 	}
+
+	public List<Todo> findAllCurrent() {
+		List<Todo> todos = findAll();
+		List<Todo> todosCurrent = new ArrayList();
+		
+		for (Todo todo:todos) {
+			if( !todo.isDone()) {
+				todosCurrent.add(todo);
+			}
+		}
+		return todosCurrent; 
+	}
+
 	
 	public Todo save(Todo todo) {
 		if (todo.getId() == -1 || todo.getId() == 0) {

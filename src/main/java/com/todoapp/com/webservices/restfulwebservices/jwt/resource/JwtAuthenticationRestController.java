@@ -25,7 +25,8 @@ import com.todoapp.com.webservices.restfulwebservices.jwt.JwtTokenUtil;
 import com.todoapp.com.webservices.restfulwebservices.jwt.JwtUserDetails;
 
 @RestController
-@CrossOrigin(origins="http://localhost:4200")
+//@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin
 public class JwtAuthenticationRestController {
 
   @Value("${jwt.http.request.header}")
