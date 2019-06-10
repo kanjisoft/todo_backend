@@ -22,9 +22,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.todoapp.entity.Habit;
 import com.todoapp.repository.HabitJpaRepository;
 
-
-
-//@CrossOrigin(origins="http://localhost:4200")
 @CrossOrigin
 @RestController
 public class HabitJpaController {
@@ -47,8 +44,6 @@ public class HabitJpaController {
 	@GetMapping("/jpa/users/{username}/habits/{id}")
 	public Habit getHabit(@PathVariable String username,  @PathVariable long id){
 		return this.habitJpaRepository.findById(id).get();
-
-		//return this.todoService.findById(id);
 	}
 
 	@PutMapping("/jpa/users/{username}/habits/{id}")
@@ -86,6 +81,5 @@ public class HabitJpaController {
 		
 		this.habitJpaRepository.deleteById(id);
 		return ResponseEntity.noContent().build(); 
-		// return ResponseEntity.notFound().build(); 
 	}
 }

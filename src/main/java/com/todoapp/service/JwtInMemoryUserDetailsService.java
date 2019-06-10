@@ -1,4 +1,4 @@
-package com.todoapp.jwt;
+package com.todoapp.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import com.todoapp.jwt.JwtUserDetails;
 
 @Service
 public class JwtInMemoryUserDetailsService implements UserDetailsService {

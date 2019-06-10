@@ -1,4 +1,4 @@
-package com.todoapp.jwt.resource;
+package com.todoapp.controller;
 
 import java.util.Objects;
 
@@ -23,6 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.todoapp.jwt.JwtTokenUtil;
 import com.todoapp.jwt.JwtUserDetails;
+import com.todoapp.jwt.resource.AuthenticationException;
+import com.todoapp.jwt.resource.JwtTokenRequest;
+import com.todoapp.jwt.resource.JwtTokenResponse;
 
 @RestController
 //@CrossOrigin(origins="http://localhost:4200")
