@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Todo {
+public class Todo implements Comparable<Todo>{
 	
 	@Id
 	@GeneratedValue
@@ -16,14 +16,17 @@ public class Todo {
 	private String description;
 	private Date targetDate;
 	private boolean isDone;
-	
-	public Todo(Long id, String username, String description, Date targetDate, boolean isDone) {
+	private Long priority;
+
+	public Todo(Long id, String username, String description, Date targetDate, 
+			boolean isDone, Long priority) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.description = description;
 		this.targetDate = targetDate;
 		this.isDone = isDone;
+		this.priority = priority;
 	}
 
 
@@ -70,6 +73,25 @@ public class Todo {
 	public void setDone(boolean isDone) {
 		this.isDone = isDone;
 	}
+	
+	public Long getPriority() {
+		return priority;
+	}
+
+
+	public void setPriority(Long priority) {
+		this.priority = priority;
+	}
+
+	
+	@Override
+	  public int compareTo(Todo t) {
+	    if (priority ==  null || t.getPriority() == null) {
+	      return 0;
+	    }
+	    return priority.compareTo(t.getPriority());
+	  }
+
 
 	@Override
 	public int hashCode() {

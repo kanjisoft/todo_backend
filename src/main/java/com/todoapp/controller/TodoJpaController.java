@@ -2,6 +2,7 @@ package com.todoapp.controller;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -42,13 +43,16 @@ public class TodoJpaController {
 	// /users/mark/todos
 	@GetMapping("/jpa/users/{username}/todos/all")
 	public List<Todo> getAllTodos(@PathVariable String username){
-		return this.todoJpaRepository.findByUsername(username);
+		List<Todo> todos = this.todoJpaRepository.findByUsername(username);
+		Collections.sort(todos);
+		return todos;
 	}
 
 	@GetMapping("/jpa/users/{username}/todos/current")
 	public List<Todo> getAllTodosCurrent(@PathVariable String username){
 		List<Todo> todos = this.todoJpaRepository.findByUsername(username);
 		List<Todo> currentTodos = new ArrayList();
+		Collections.sort(todos);
 		for (Todo todo:todos) {
 			if (!todo.isDone()) {
 				currentTodos.add(todo);
@@ -68,7 +72,6 @@ public class TodoJpaController {
 		todo.setDone(!todo.isDone());
 		Todo todoUpdated = this.todoJpaRepository.save(todo);
 		return todoUpdated; 
-		//return this.todoService.findById(id);
 	}
 	
 	@PutMapping("/jpa/users/{username}/todos/{id}")

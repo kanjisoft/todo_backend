@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Habit  implements Comparable<Habit>{
+public class Habit implements Comparable<Habit>{
 	
 	@Id
 	@GeneratedValue
@@ -84,7 +84,6 @@ public class Habit  implements Comparable<Habit>{
 	}
 
 	public Long getPriority() {
-		// Returing priority
 		return priority;
 	}
 
