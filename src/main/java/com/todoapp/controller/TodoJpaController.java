@@ -79,7 +79,6 @@ public class TodoJpaController {
 			@PathVariable long id,
 			@RequestBody Todo todo) 
 	{
-		//Todo todoUpdated = todoService.save(todo);
 		Todo todoUpdated = this.todoJpaRepository.save(todo);
 		return new ResponseEntity<Todo>(todoUpdated, HttpStatus.OK) ; 
 	}
@@ -104,11 +103,8 @@ public class TodoJpaController {
 	}
 	
 	@DeleteMapping("/jpa/users/{username}/todos/{id}")
-	public ResponseEntity<Void> deleteTodo(@PathVariable String username, @PathVariable long id) {
-		// Todo todo = this.todoService.deleteById(id);
-		
+	public ResponseEntity<Void> deleteTodo(@PathVariable String username, @PathVariable long id) {		
 		this.todoJpaRepository.deleteById(id);
 		return ResponseEntity.noContent().build(); 
-		// return ResponseEntity.notFound().build(); 
 	}
 }

@@ -13,7 +13,7 @@ import com.todoapp.entity.Todo;
 @Service
 public class TodoHardcodedService {
 
-	   Logger logger = LoggerFactory.getLogger(TodoHardcodedService.class);
+	Logger logger = LoggerFactory.getLogger(TodoHardcodedService.class);
 	   
 	private static List<Todo> todos = new ArrayList();
 	private static long idCounter = 0; 

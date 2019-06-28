@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.todoapp.entity.Habit;
+import com.todoapp.repository.CalendarEntryJpaRepository;
 import com.todoapp.repository.HabitJpaRepository;
 
 @CrossOrigin
@@ -32,6 +33,9 @@ public class HabitJpaController {
 	
 	@Autowired
 	private HabitJpaRepository habitJpaRepository;
+	
+	@Autowired
+	private CalendarEntryJpaRepository calendarEntryJpaRepository;
 	
 	// /users/mark/todos
 	@GetMapping("/jpa/users/{username}/habits")
@@ -51,7 +55,6 @@ public class HabitJpaController {
 			@PathVariable long id,
 			@RequestBody Habit habit) 
 	{
-		//Todo todoUpdated = todoService.save(todo);
 		Habit habitUpdated = this.habitJpaRepository.save(habit);
 		return new ResponseEntity<Habit>(habitUpdated, HttpStatus.OK) ; 
 	}
@@ -60,7 +63,6 @@ public class HabitJpaController {
 	public ResponseEntity<Void> createHabit(@PathVariable String username, 
 			@RequestBody Habit habit) 
 	{
-		//Todo todoUpdated = todoService.save(todo);
 		habit.setUsername(username);
 		log.info("username: " + username);
 		Habit createdHabit = this.habitJpaRepository.save(habit);
