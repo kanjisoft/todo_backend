@@ -11,4 +11,5 @@ import com.todoapp.entity.CalendarEntry;
 public interface CalendarEntryJpaRepository extends JpaRepository<CalendarEntry, Long>{
 	
 	List<CalendarEntry> findByUserName(String username);
+	List<CalendarEntry> findByUserNameAndHabitId(String username, Long habitId);
 }
