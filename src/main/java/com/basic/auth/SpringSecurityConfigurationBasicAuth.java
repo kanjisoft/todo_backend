@@ -1,4 +1,4 @@
-package com.todoapp.basic.auth;
+package com.basic.auth;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
