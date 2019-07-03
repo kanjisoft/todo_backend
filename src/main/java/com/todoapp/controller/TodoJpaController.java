@@ -41,21 +41,37 @@ public class TodoJpaController {
 	private TodoJpaRepository todoJpaRepository;
 	
 	// /users/mark/todos
-	@GetMapping("/jpa/users/{username}/todos/all")
-	public List<Todo> getAllTodos(@PathVariable String username){
+	@GetMapping("/jpa/users/{username}/todos/personal")
+	public List<Todo> getAllTodosPersonal(@PathVariable String username){
 		List<Todo> todos = this.todoJpaRepository.findByUsername(username);
+		List<Todo> currentTodos = new ArrayList();
 		Collections.sort(todos);
-		return todos;
+		for (Todo todo : todos) {
+			if (!todo.isDone()) {
+				if (!todo.isWorkRelated()) {
+					log.info("not work related, returning: " + todo.getDescription());
+					currentTodos.add(todo);
+				} else {
+					log.info("work related, not returning: " + todo.getDescription());
+				}
+			}
+		}
+		return currentTodos; 
 	}
 
-	@GetMapping("/jpa/users/{username}/todos/current")
-	public List<Todo> getAllTodosCurrent(@PathVariable String username){
+	@GetMapping("/jpa/users/{username}/todos/work")
+	public List<Todo> getAllTodosWorkRelated(@PathVariable String username){
 		List<Todo> todos = this.todoJpaRepository.findByUsername(username);
 		List<Todo> currentTodos = new ArrayList();
 		Collections.sort(todos);
 		for (Todo todo:todos) {
 			if (!todo.isDone()) {
-				currentTodos.add(todo);
+				if (todo.isWorkRelated()) {
+					log.debug("work related, returning: " + todo.getDescription());
+					currentTodos.add(todo);
+				}
+			} else {
+				log.debug("not work related, not returning: " + todo.getDescription());
 			}
 		}
 		return currentTodos; 

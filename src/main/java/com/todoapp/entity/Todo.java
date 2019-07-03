@@ -17,9 +17,12 @@ public class Todo implements Comparable<Todo>{
 	private Date targetDate;
 	private boolean isDone;
 	private Long priority;
+	private boolean workRelated;
+
+
 
 	public Todo(Long id, String username, String description, Date targetDate, 
-			boolean isDone, Long priority) {
+			boolean isDone, Long priority, boolean workRelated) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -27,6 +30,7 @@ public class Todo implements Comparable<Todo>{
 		this.targetDate = targetDate;
 		this.isDone = isDone;
 		this.priority = priority;
+		this.workRelated = workRelated;
 	}
 
 
@@ -83,6 +87,14 @@ public class Todo implements Comparable<Todo>{
 		this.priority = priority;
 	}
 
+	public boolean isWorkRelated() {
+		return workRelated;
+	}
+
+
+	public void setWorkRelated(boolean workRelated) {
+		this.workRelated = workRelated;
+	}
 	
 	@Override
 	  public int compareTo(Todo t) {

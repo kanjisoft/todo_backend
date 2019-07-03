@@ -32,11 +32,6 @@ public class TodoController {
 	public List<Todo> getAllTodos(@PathVariable String username){
 		return this.todoService.findAll();
 	}
-
-//	@GetMapping("/users/{username}/todoscurrent")
-//	public List<Todo> getAllTodosCurrent(@PathVariable String username){
-//		return this.todoService.findAllCurrent(); 
-//	}
 	
 	@GetMapping("/users/{username}/todos/{id}")
 	public Todo getTodo(@PathVariable String username,  @PathVariable long id){

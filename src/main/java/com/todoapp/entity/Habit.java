@@ -1,8 +1,14 @@
 package com.todoapp.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Habit implements Comparable<Habit>{
@@ -16,6 +22,10 @@ public class Habit implements Comparable<Habit>{
 	private String reminder;
 	private String reward;
 	private Long priority;
+
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="habit_id")
+    private Set<CalendarEntry> accounts;
 
 	public Habit(Long id, String username, String habitname, String description, String reminder, String reward,
 			Long priority) {
