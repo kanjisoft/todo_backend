@@ -10,6 +10,6 @@ import com.todoapp.entity.Todo;
 @Repository
 public interface TodoJpaRepository extends JpaRepository<Todo, Long>{
 	
-	List<Todo> findByUsername(String username);
+	List<Todo> findByUsernameOrderByPriorityAscTargetDateAsc(String username);
 
 }

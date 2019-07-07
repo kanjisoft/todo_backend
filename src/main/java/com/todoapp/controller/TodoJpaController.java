@@ -43,7 +43,7 @@ public class TodoJpaController {
 	// /users/mark/todos
 	@GetMapping("/jpa/users/{username}/todos/personal")
 	public List<Todo> getAllTodosPersonal(@PathVariable String username){
-		List<Todo> todos = this.todoJpaRepository.findByUsername(username);
+		List<Todo> todos = this.todoJpaRepository.findByUsernameOrderByPriorityAscTargetDateAsc(username);
 		List<Todo> currentTodos = new ArrayList();
 		Collections.sort(todos);
 		for (Todo todo : todos) {
@@ -61,7 +61,7 @@ public class TodoJpaController {
 
 	@GetMapping("/jpa/users/{username}/todos/work")
 	public List<Todo> getAllTodosWorkRelated(@PathVariable String username){
-		List<Todo> todos = this.todoJpaRepository.findByUsername(username);
+		List<Todo> todos = this.todoJpaRepository.findByUsernameOrderByPriorityAscTargetDateAsc(username);
 		List<Todo> currentTodos = new ArrayList();
 		Collections.sort(todos);
 		for (Todo todo:todos) {
@@ -71,7 +71,7 @@ public class TodoJpaController {
 					currentTodos.add(todo);
 				}
 			} else {
-				log.debug("not work related, not returning: " + todo.getDescription());
+					log.debug("not work related, not returning: " + todo.getDescription());
 			}
 		}
 		return currentTodos; 
